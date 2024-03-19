@@ -5,6 +5,7 @@ import com.hemal.accounts.entity.Accounts;
 
 public class AccountsMapper {
 
+    // entity -> DTO
     public static AccountsDto mapToAccountsDto(Accounts accounts, AccountsDto accountsDto) {
         accountsDto.setAccountNumber(accounts.getAccountNumber());
         accountsDto.setAccountType(accounts.getAccountType());
@@ -13,6 +14,7 @@ public class AccountsMapper {
         return accountsDto;
     }
 
+    // DTO -> entity
     public static Accounts mapToAccounts(AccountsDto accountsDto, Accounts accounts) {
         accounts.setAccountNumber(accountsDto.getAccountNumber());
         accounts.setAccountType(accountsDto.getAccountType());

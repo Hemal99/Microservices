@@ -1,10 +1,13 @@
 package com.hemal.accounts.service.impl;
 
 import com.hemal.accounts.constants.AccountConstants;
+import com.hemal.accounts.dto.AccountsDto;
 import com.hemal.accounts.dto.CustomerDto;
 import com.hemal.accounts.entity.Accounts;
 import com.hemal.accounts.entity.Customer;
 import com.hemal.accounts.exception.CustomerAlreadyExistsException;
+import com.hemal.accounts.exception.ResourceNotFoundException;
+import com.hemal.accounts.mapper.AccountsMapper;
 import com.hemal.accounts.mapper.CustomerMapper;
 import com.hemal.accounts.repository.AccountRepository;
 import com.hemal.accounts.repository.CustomerRepository;
@@ -45,6 +48,19 @@ public class AccountsServiceImpl implements IAccountService {
         Customer savedCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccounts(savedCustomer));
 
+    }
+
+    @Override
+    public CustomerDto fetchAccountDetails(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
+                () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
+        );
+        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
+        customerDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDto()));
+        return customerDto;
     }
 
     private Accounts createNewAccounts(Customer customer){
