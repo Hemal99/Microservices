@@ -13,6 +13,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
+
+ /*****************
+ if we remove AllArgsConstructor there
+    will be only default construct
+    and for default construct the AutoWiring will not happen
+    so iAccountService will be null
+  ******************************/
+
 public class AccountsController {
 
     private IAccountService iAccountService;
