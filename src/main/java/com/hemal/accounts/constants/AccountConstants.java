@@ -28,4 +28,10 @@ public class AccountConstants {
 
     public static final String CUSTOMER_ALREADY_EXISTS = "Customer Already Exists";
 
+    public static final String STATUS_417 = "417";
+
+    public static final String MESSAGE_417_UPDATE = "Update Operation Failed";
+
+    public static final String MESSAGE_417_DELETE = "Delete Operation Failed";
+
 }

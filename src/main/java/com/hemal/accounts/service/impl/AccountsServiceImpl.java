@@ -40,8 +40,7 @@ public class AccountsServiceImpl implements IAccountService {
              throw new CustomerAlreadyExistsException(AccountConstants.CUSTOMER_ALREADY_EXISTS + customerDto.getMobileNumber());
          }
 
-         customer.setCreatedAt(LocalDateTime.now());
-         customer.setCreatedBy("Anonymouse");
+
 
 
 
@@ -81,8 +80,7 @@ public class AccountsServiceImpl implements IAccountService {
 
         newAccount.setBranchAddress(AccountConstants.ADDRESS);
 
-        newAccount.setCreatedAt(LocalDateTime.now());
-        newAccount.setCreatedBy("Anonymouse");
+
 
         return  newAccount;
     }
